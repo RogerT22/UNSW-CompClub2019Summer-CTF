@@ -1,10 +1,11 @@
 config: dict
 
 
+# function annotations 
 def readConfig(file="settings.ini") -> dict:
     _defaultFile = "settings.ini"
     _skeletonFile = "settings.example.ini"
-    
+
     import os.path
     if file == _defaultFile and not os.path.isfile(file):
       if not os.path.isfile(_skeletonFile):

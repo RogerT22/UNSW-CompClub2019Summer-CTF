@@ -12,16 +12,30 @@
 })();
 
 function openModalEdit(questionId, srcElem) {
+  // ohhh modal is just the window!
+  // the document is the admin page?
   let modal = document.getElementById("editModal");
+  // we are selecting name=flag? is it grabbing something with an attribute of name = flag?
+  // ohhh is this just to make sure flag is put in correctly?
+  //
   let flagInput = modal.querySelector("[name=flag]");
 
+  // is NEW STORES TRUE OR FALSE
+  // right to left
   let isNew = questionId === undefined;
+  // Classes on an element
+  // second parameter forces the class to be added or removed 
+  // false removes, true adds
+  // if not new --> then make edit an option
   modal.classList.toggle("editQuestion", !isNew);
 
+  // we are setting the flag parts 
   flagInput.value = "";
   flagInput.placeholder = "FLAG{...}";
   flagInput.required = isNew;
 
+  // if we are creating a new modal? we just ask for new strings
+  // or look into it?
   if (isNew) {
     modal.querySelector("[name=title]").value = "";
     modal.querySelector("[name=category]").value = "";
@@ -35,6 +49,7 @@ function openModalEdit(questionId, srcElem) {
     modal.querySelector("input[type=range]").value = question.value;
   }
 
+  // is this another funciton??
   const updateFlagEvent = function(evt) {
     flagInput.required = true;
     if (flagInput.reportValidity()) {
@@ -68,6 +83,7 @@ function openModalEdit(questionId, srcElem) {
   };
 
   const confirmEvent = function(evt) {
+    // HERE IT IS THE FORM
     if (modal.querySelector("form").reportValidity()) {
       modal
         .querySelector("button.confirm")
@@ -75,6 +91,7 @@ function openModalEdit(questionId, srcElem) {
       this.classList.add("is-loading");
 
       let endpoint = isNew ? "submit" : "edit";
+       // we are getting the info
       let data = {
         title: modal.querySelector("[name=title]").value,
         category: modal.querySelector("[name=category]").value,
@@ -122,10 +139,12 @@ function openModalEdit(questionId, srcElem) {
     modal.classList.remove("is-active");
   };
   const cancelEvent = closeModal;
-
+  // look for first button in the model that has update flag?
+  // if pressed then run update flag option?
   modal
     .querySelector(".button[name=updateFlag]")
     .addEventListener("click", updateFlagEvent);
+  // OHHHH THESE HAVE The function stuck on s listeneres!! He just names confirm and cancel?
   modal.querySelector("button.confirm").addEventListener("click", confirmEvent);
   modal.querySelector("button.cancel").addEventListener("click", cancelEvent);
   modal

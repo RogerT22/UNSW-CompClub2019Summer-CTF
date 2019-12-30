@@ -52,9 +52,7 @@
                   name="category"
                   class="blueBox has-text-light"
                   required
-                >
-                <option value= "Testing">Testing</option>
-                </select>
+                ></select>
               </div>
             </div>
           </div>

@@ -53,7 +53,7 @@ class routing:
 
         return wrapper
 
-
+        # these are request handlers???
 class APIHandler(tornado.web.RequestHandler):
     def get_current_user(self):
         try:

@@ -11,11 +11,14 @@ from lib import database
 from lib.api import APIHandler
 from lib.site import SSEHandler, SSE_messages, SiteHandler
 
+# IS THIS CONNECTING VIEWS TO THE TORNADO APPLICTION??
 app = tornado.web.Application([
-    ("/api/v1/(.*)", APIHandler),
+    ("/api/v1/(.*)", APIHandler), #url, method? route, view pairs
     ("/orchestrator", SSEHandler),
     ("/(.*)", SiteHandler),
 ],
+    # these are part of the app!
+    # useful links?
     cookie_secret="5206677",
     login_url="/invite"
 )
@@ -31,13 +34,13 @@ if database.conn is not None:
     lib.authSession.cleanup()
 
     import lib.ctf
-
+    # database done here?
     lib.ctf.initDatabase()
 
 else:
     raise Exception("Cannot create the database connection.")
 
-
+# annonation again file is a string
 def run(file: str = None, **kwargs):
     print("UNSW CSE CompClub 2019 Summer CTF Server")
     print("                      [ by Andrew Wong ]")
@@ -48,6 +51,7 @@ def run(file: str = None, **kwargs):
         print("Loading config file:", file)
         import lib
         from lib.config import readConfig
+        # Must be getting the CONFIGURAITON OF THE FILE
         lib.config = config = readConfig(file)
     else:
         from lib.config import config
@@ -77,6 +81,7 @@ def run(file: str = None, **kwargs):
     SSE_messages.addMessage("The game server is online!")
     SSE_messages.do.reloadSite()
 
+    # DO
     tornado.ioloop.IOLoop.current().start()
 
 

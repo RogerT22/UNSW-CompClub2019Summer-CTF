@@ -34,6 +34,7 @@ class routing:
 from ..authSession import updateSession, getSession
 from ..auth import UserSession
 
+# Site handler is not dealing with request??? it's using static file handler??
 class SiteHandler(tornado.web.StaticFileHandler, BaseHandler):
     def initialize(self, **kwargs):
         super().initialize(config["SITE"].get(
